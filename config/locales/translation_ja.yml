@@ -1,0 +1,35 @@
+ja:
+  activerecord:
+    models:
+      book: 本  #g
+
+    attributes:
+      book:
+        author: 著者  #g
+        memo: メモ  #g
+        picture: 画像  #g
+        title: タイトル  #g
+
+  books:
+    index:
+      page_title: 本一覧
+      new_book: 追加
+      show: 詳細
+      edit: 編集
+      destroy: 削除
+
+    edit:
+      page_title: 編集
+      show: 詳細
+      back: ホーム
+
+    show:
+      edit: 編集
+      back: ホーム
+
+    new:
+      page_title: 新規登録
+      back: ホーム
+
+    form:
+      submit: 登録

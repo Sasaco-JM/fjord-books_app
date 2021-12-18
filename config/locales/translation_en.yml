@@ -14,22 +14,18 @@ en:
     index:
       page_title: Books
       new_book: Add Book
-      show: Detail
-      edit: Edit
       destroy: Delete
 
     edit:
       page_title: Edit Book
-      show: Detail
-      back: Home
-
-    show:
-      edit: Edit
-      back: home
 
     new:
       page_title: New Book
-      back: Home
 
     form:
       submit: Register
+
+    common:
+      show: Detail
+      edit: Edit
+      back: Home

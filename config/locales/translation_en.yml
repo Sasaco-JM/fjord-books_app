@@ -1,0 +1,31 @@
+en:
+  activerecord:
+    models:
+      book: Book  #g
+
+    attributes:
+      book:
+        author: Author  #g
+        memo: Memo  #g
+        picture: Picture  #g
+        title: Title  #g
+        
+  books:
+    index:
+      page_title: Books
+      new_book: Add Book
+      destroy: Delete
+
+    edit:
+      page_title: Edit Book
+
+    new:
+      page_title: New Book
+
+    form:
+      submit: Register
+
+    common:
+      show: Detail
+      edit: Edit
+      back: Home

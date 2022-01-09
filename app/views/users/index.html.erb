@@ -1,5 +1,4 @@
-<% provide(:title, 'All users') %>
-<h1>All users</h1>
+<h1><%= User.model_name.human %></h1>
  
 <% if @users.present? %>
   <ul class="users">

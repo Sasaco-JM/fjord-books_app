@@ -10,6 +10,25 @@
   </head>
 
   <body>
+    <% if notice %>
+    <p id="notice"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+    <p><%= alert %></p>
+    <% end %>
+
+    <p>
+      <% if user_signed_in? %>
+      <%= t('views.common.login_user') %> <strong><%= current_user.email %></strong>.
+       <%= link_to t('views.common.books'), '/books' %> |
+        <%= link_to t('views.common.users'), '/users' %> |
+        <%= link_to t('views.common.edit_profile'), edit_user_registration_path %> |
+        <%= link_to t('views.common.logout'), destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to t('views.common.sign_up'), new_user_registration_path %> |
+        <%= link_to t('views.common.login'), new_user_session_path %>
+      <% end %>
+    </p>
     <%= yield %>
   </body>
 </html>

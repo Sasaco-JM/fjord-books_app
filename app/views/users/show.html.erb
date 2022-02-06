@@ -15,21 +15,21 @@
   </a>
 </div>
 
-
+<% unless current_user?(@user) %>
   <div>
-  <% if current_user.following?(@user) %>
-    <%= form_for(current_user.active_relationships.find_by(followed_id: @user.id),
-    html: { method: :delete }) do |f| %>
-      <%= f.submit t('.unfollow') %>
+    <% if current_user.following?(@user) %>
+      <%= form_for(current_user.active_relationships.find_by(followed_id: @user.id),
+      html: { method: :delete }) do |f| %>
+        <%= f.submit t('.unfollow') %>
+      <% end %>
+    <% else %>
+      <%= form_for(current_user.active_relationships.build) do |f| %>
+        <div><%= hidden_field_tag :followed_id, @user.id %></div>
+        <%= f.submit t('.follow') %>
+      <% end %>
     <% end %>
-  <% else %>
-    <%= form_for(current_user.active_relationships.build) do |f| %>
-      <div><%= hidden_field_tag :followed_id, @user.id %></div>
-      <%= f.submit t('.follow') %>
-    <% end %>
-  <% end %>
   </div>
-
+<% end %> 
 
 <p>
   <strong><%= User.human_attribute_name(:email) %>:</strong>

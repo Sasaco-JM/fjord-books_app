@@ -6,9 +6,19 @@
 </p>
 
 <p>
-  <strong><%= Report.human_attribute_name(:content) %></strong>
+  <strong><%= Report.human_attribute_name(:content) %>:</strong>
   <%= @report.content %>
 </p>
+<p>
+  <strong><%= Report.human_attribute_name(:created_at) %>:</strong>
+  <%= l @report.created_at %>
+</p>
 
-<%= link_to t('views.common.edit'), edit_report_path(@report) %> |
-<%= link_to t('views.common.back'), reports_path %>
+<% if @report.user_id == current_user.id %>
+  <%= link_to t('views.common.edit'), edit_report_path(@report) %> |
+  <%= link_to t('views.common.back'), reports_path %>
+<% end %>
+
+<br>
+
+<%= render 'comments/show' ,comments: @comments, commentable: @commentable %>

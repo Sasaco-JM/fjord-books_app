@@ -1,0 +1,11 @@
+<%= form_with(model: [commentable, Comment.new], method: :post) do |form| %>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content, required: true %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit t('views.common.post_comment') %>
+  </div>
+<% end %>

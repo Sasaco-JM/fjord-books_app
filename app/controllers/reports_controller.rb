@@ -3,7 +3,7 @@ class ReportsController < ApplicationController
 
   # GET /reports or /reports.json
   def index
-    @reports = Report.all
+    @reports = Report.order(:id).page(params[:page])
   end
 
   # GET /reports/1 or /reports/1.json
@@ -22,6 +22,7 @@ class ReportsController < ApplicationController
   # POST /reports or /reports.json
   def create
     @report = Report.new(report_params)
+    @report.user_id = current_user.id
 
     respond_to do |format|
       if @report.save
@@ -64,6 +65,6 @@ class ReportsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def report_params
-      params.require(:report).permit(:title, :content, :user_id)
+      params.require(:report).permit(:title, :content)
     end
 end

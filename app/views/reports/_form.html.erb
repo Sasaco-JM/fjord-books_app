@@ -4,7 +4,7 @@
       <h2><%= pluralize(report.errors.count, "error") %> prohibited this report from being saved:</h2>
 
       <ul>
-        <% report.errors.each do |error| %>
+        <% report.errors.full_messages.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -19,11 +19,6 @@
   <div class="field">
     <%= form.label :content %>
     <%= form.text_area :content %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
   </div>
 
   <div class="actions">

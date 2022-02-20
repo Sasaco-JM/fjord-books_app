@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   before_action :set_commentable
   before_action :set_comment, only: :destroy
-  
+
   # POST /reports/1/comments
   def create
     @comment = @commentable.comments.build(comment_params)
@@ -26,16 +28,17 @@ class CommentsController < ApplicationController
   end
 
   private
-    def set_commentable
-      resource, id = request.path.split('/')[1,2]
-      @commentable = resource.singularize.classify.constantize.find(id)
-    end
 
-    def set_comment
-      @comment = Comment.find(params[:id])
-    end
+  def set_commentable
+    resource, id = request.path.split('/')[1, 2]
+    @commentable = resource.singularize.classify.constantize.find(id)
+  end
 
-    def comment_params
-      params.require(:comment).permit(:content)
-    end
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
+
+  def comment_params
+    params.require(:comment).permit(:content)
+  end
 end

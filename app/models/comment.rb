@@ -4,7 +4,7 @@ class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :commentable, polymorphic: true
 
-  def name_or_email
+  def created_user_name_or_email
     user = User.find(user_id)
     user.name.presence || user.email
   end

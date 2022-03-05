@@ -3,6 +3,7 @@
 class CommentsController < ApplicationController
   before_action :set_commentable
   before_action :set_comment, only: :destroy
+  before_action :correct_user, only: :destroy
 
   # POST /reports/1/comments
   def create
@@ -10,10 +11,7 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id
 
     if @comment.save
-      respond_to do |format|
-        format.html { redirect_to @commentable, notice: t('controllers.common.notice_create', name: Comment.model_name.human) }
-        format.json { head :no_content }
-      end
+      redirect_to @commentable, notice: t('controllers.common.notice_create', name: Comment.model_name.human)
     else
       render :new
     end
@@ -21,10 +19,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment.destroy
-    respond_to do |format|
-      format.html { redirect_to @commentable, notice: t('controllers.common.notice_destroy', name: Comment.model_name.human) }
-      format.json { head :no_content }
-    end
+    redirect_to @commentable, notice: t('controllers.common.notice_destroy', name: Comment.model_name.human)
   end
 
   private
@@ -40,5 +35,10 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:content)
+  end
+
+  def correct_user
+    @user = @comment.user
+    redirect_to @commentable, notice: t('controllers.common.unauthorized') unless @user == current_user
   end
 end

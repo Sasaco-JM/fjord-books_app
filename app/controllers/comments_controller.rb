@@ -3,12 +3,12 @@
 class CommentsController < ApplicationController
   before_action :set_commentable
   before_action :set_comment, only: :destroy
-  before_action :correct_user, only: :destroy
+  before_action :confirm_user, only: :destroy
 
   # POST /reports/1/comments
   def create
     @comment = @commentable.comments.build(comment_params)
-    @comment.user_id = current_user.id
+    @comment.user = current_user
 
     if @comment.save
       redirect_to @commentable, notice: t('controllers.common.notice_create', name: Comment.model_name.human)
@@ -37,8 +37,8 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:content)
   end
 
-  def correct_user
-    @user = @comment.user
-    redirect_to @commentable, notice: t('controllers.common.unauthorized') unless @user == current_user
+  def confirm_user
+    user = @comment.user
+    redirect_to @commentable, notice: t('controllers.common.unauthorized') unless user == current_user
   end
 end
